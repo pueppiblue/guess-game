@@ -7,10 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
+#[ORM\Entity()]
 final class Team
 {
     #[ORM\Id()]
-    #[ORM\Column()]
+    #[ORM\Column(type: "uuid", unique: true)]
     private UuidInterface $id;
 
     #[ORM\Column(length: 255, nullable: false)]

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Player;
 
-use App\Entity\PlayerTest;
 use App\Infrastructure\Repository\PlayerRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,7 +16,7 @@ use Ramsey\Uuid\UuidInterface;
 class Player
 {
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(type: "uuid", unique: true)]
     private UuidInterface $id;
 
     #[ORM\Column(length: 255, unique: true, nullable: true)]
@@ -38,7 +37,7 @@ class Player
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
-    #[ORM\Column(length: 255, nullable: false)]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private DateTimeInterface $createdAt;
 
     #[ORM\OneToMany(targetEntity: Guess::class, mappedBy: "player", cascade: ['persist', 'remove'])]

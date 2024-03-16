@@ -3,17 +3,28 @@ declare(strict_types=1);
 
 namespace App\Domain\League;
 
+use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
+#[ORM\Entity()]
 final class League
 {
 
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private UuidInterface $id;
 
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
     private string $name;
+
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
     private string $sluggedName;
+
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
     private string $logo;
+
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
     private string $apiId;
 
     public function __construct()

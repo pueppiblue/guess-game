@@ -7,15 +7,17 @@ use App\Domain\Game\Game;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
+#[ORM\Entity()]
 class Guess
 {
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private Uuid $id;
 
     #[ORM\Column(length: 255, unique: true, nullable: true)]
     private string $guess;
 
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private \DateTimeInterface $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'guesses')]

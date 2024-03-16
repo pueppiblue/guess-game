@@ -6,7 +6,6 @@ namespace App\Domain\Game;
 use App\Domain\League\League;
 use App\Domain\Player\Guess;
 use App\Domain\Team\Team;
-use App\Entity\PlayerTest;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,13 +20,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 final class Game
 {
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(type: "uuid", unique: true)]
     private UuidInterface $id;
 
     #[ORM\Column(length: 255, unique: true, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private DateTimeInterface $gameTime;
 
     #[ORM\Column(length: 255, unique: true, nullable: true)]
