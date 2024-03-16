@@ -27,9 +27,11 @@ final class League
     #[ORM\Column(length: 255, unique: true, nullable: true)]
     private string $apiId;
 
-    public function __construct()
+    public function __construct(string $name, string $sluggedName = null)
     {
         $this->id = Uuid::uuid4();
+        $this->name = $name;
+        $this->sluggedName = $sluggedName ?? $name;
     }
 
     public function getId(): UuidInterface

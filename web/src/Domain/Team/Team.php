@@ -20,9 +20,10 @@ final class Team
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo = null;
 
-    public function __construct()
+    public function __construct(string $name)
     {
         $this->id = Uuid::uuid4();
+        $this->name = $name;
     }
 
     public function getId(): UuidInterface
