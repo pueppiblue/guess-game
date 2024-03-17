@@ -36,11 +36,11 @@ if [ "${APP_ENVIRONMENT}" = "dev" ]; then
 elif [ "${APP_ENVIRONMENT}" = "test" ]; then
     gosu ${CONTAINER_USER} php bin/console cache:clear --env=test
     gosu ${CONTAINER_USER} php bin/console doctrine:schema:update --force --env=test
-    gosu ${CONTAINER_USER} php bin/console app:event-store:create --env=test
+#    gosu ${CONTAINER_USER} php bin/console app:event-store:create --env=test
 #    gosu ${CONTAINER_USER} vendor/bin/bdi detect drivers
 else
     gosu ${CONTAINER_USER} php bin/console doctrine:migrations:migrate -n --env="${APP_ENVIRONMENT}"
-    gosu ${CONTAINER_USER} php bin/console assets:install --env=${APP_ENVIRONMENT}
+#    gosu ${CONTAINER_USER} php bin/console assets:install --env=${APP_ENVIRONMENT}
 #    gosu ${CONTAINER_USER} php bin/console app:event-store:replay --env="${APP_ENVIRONMENT}"
 fi
 

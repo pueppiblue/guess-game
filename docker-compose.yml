@@ -62,5 +62,5 @@ services:
 
 networks:
     default:
-        name: ${PROJECT_NAME}-${DEPLOY_ENV?:DEPLOY_ENV is not set or empty}
+        name: guess-dev
         external: true
