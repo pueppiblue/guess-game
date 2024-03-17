@@ -10,10 +10,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
-class Player
+class Player implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: "uuid", unique: true)]
@@ -45,6 +47,7 @@ class Player
 
     public function __construct()
     {
+        $this->id = Uuid::uuid4();
         $this->avatar = "1";
         $this->point = 0;
         $this->createdAt = new \DateTimeImmutable();
@@ -59,6 +62,16 @@ class Player
     public function getUsername(): ?string
     {
         return $this->username;
+    }
+
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function setPassword(?string $password): void
+    {
+        $this->password = $password;
     }
 
     public function getEmail(): ?string
@@ -125,5 +138,20 @@ class Player
         }
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->password = null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }
